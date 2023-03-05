@@ -1,9 +1,0 @@
-.\objects\udma.o: source\ti\devices\msp432e4\driverlib\udma.c
-.\objects\udma.o: source\ti\devices\msp432e4\driverlib\types.h
-.\objects\udma.o: D:\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\udma.o: D:\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\udma.o: source\ti\devices\msp432e4\driverlib\inc/hw_sysctl.h
-.\objects\udma.o: source\ti\devices\msp432e4\driverlib\inc/hw_udma.h
-.\objects\udma.o: source\ti\devices\msp432e4\driverlib\debug.h
-.\objects\udma.o: source\ti\devices\msp432e4\driverlib\interrupt.h
-.\objects\udma.o: source\ti\devices\msp432e4\driverlib\udma.h
