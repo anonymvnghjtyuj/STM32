@@ -1,0 +1,147 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.25.3.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: god 8613973441306, sky, LIC=YA39H-W3PQ3-30UNC-7VA0R-47UG9-7DRGF
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.14.0.0
+Toolchain Path:  D:\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DCM.DLL V1.13.1.0
+Target DLL:      Segger\JL2CM3.dll V2.99.13.0
+Dialog DLL:      TCM.DLL V1.14.4.0
+ 
+<h2>Project:</h2>
+C:\Users\86139\Desktop\（库函数版本，适合MiniSTM32开发板）扩展实验11 ATK-HC05蓝牙串口模块实验\USER\HC05.uvprojx
+Project File Date:  03/05/2022
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.05 update 1 (build 106)', folder: 'D:\ARM\ARMCC\Bin'
+Build target 'ATK-HC05'
+compiling key.c...
+compiling led.c...
+compiling main.c...
+compiling system_stm32f10x.c...
+compiling hc05.c...
+compiling stm32f10x_gpio.c...
+compiling stm32f10x_usart.c...
+compiling usart.c...
+compiling delay.c...
+compiling lcd.c...
+..\HARDWARE\LCD\lcd.c(266): error:  #20: identifier "szxa" is undefined
+  szxa
+..\HARDWARE\LCD\lcd.c(268): error:  #65: expected a ";"
+      if ((lcddev.dir == 1 && lcddev.id != 0X1963) || (lcddev.dir == 0 && lcddev.id == 0X1963))
+..\HARDWARE\LCD\lcd.c(290): warning:  #12-D: parsing restarts here after previous syntax error
+                  break;
+..\HARDWARE\LCD\lcd.c(292): error:  #121: a case label may only be used within a switch
+              case 5:
+..\HARDWARE\LCD\lcd.c(294): error:  #116: a break statement may only be used within a loop or switch
+                  break;
+..\HARDWARE\LCD\lcd.c(296): error:  #121: a case label may only be used within a switch
+              case 6:
+..\HARDWARE\LCD\lcd.c(298): error:  #116: a break statement may only be used within a loop or switch
+                  break;
+..\HARDWARE\LCD\lcd.c(300): error:  #121: a case label may only be used within a switch
+              case 7:
+..\HARDWARE\LCD\lcd.c(302): error:  #116: a break statement may only be used within a loop or switch
+                  break;
+..\HARDWARE\LCD\lcd.c(261): warning:  #550-D: parameter "dir" was set but never used
+  void LCD_Scan_Dir(u8 dir)
+..\HARDWARE\LCD\lcd.c(263): warning:  #177-D: variable "regval" was declared but never referenced
+      u16 regval = 0;
+..\HARDWARE\LCD\lcd.c(264): warning:  #177-D: variable "dirreg" was declared but never referenced
+      u16 dirreg = 0;
+..\HARDWARE\LCD\lcd.c(265): warning:  #177-D: variable "temp" was declared but never referenced
+      u16 temp;
+..\HARDWARE\LCD\lcd.c(304): error:  #169: expected a declaration
+      }
+..\HARDWARE\LCD\lcd.c(329): warning:  #12-D: parsing restarts here after previous syntax error
+              regval |= (0 << 7) | (1 << 6) | (1 << 5);
+..\HARDWARE\LCD\lcd.c(330): error:  #169: expected a declaration
+              break;
+..\HARDWARE\LCD\lcd.c(332): error:  #169: expected a declaration
+          case D2U_L2R://从下到上,从左到右
+..\HARDWARE\LCD\lcd.c(334): error:  #169: expected a declaration
+              break;
+..\HARDWARE\LCD\lcd.c(336): error:  #169: expected a declaration
+          case D2U_R2L://从下到上,从右到左
+..\HARDWARE\LCD\lcd.c(338): error:  #169: expected a declaration
+              break;
+..\HARDWARE\LCD\lcd.c(339): error:  #169: expected a declaration
+      }
+..\HARDWARE\LCD\lcd.c(342): error:  #169: expected a declaration
+      else dirreg = 0X36;
+..\HARDWARE\LCD\lcd.c(344): error:  #169: expected a declaration
+      if (lcddev.id == 0X9341 || lcddev.id == 0X7789)   //9341 & 7789 要设置BGR位
+..\HARDWARE\LCD\lcd.c(349): warning:  #12-D: parsing restarts here after previous syntax error
+      LCD_WriteReg(dirreg, regval);
+..\HARDWARE\LCD\lcd.c(351): error:  #169: expected a declaration
+      if (lcddev.id != 0X1963)   //1963不做坐标处理
+..\HARDWARE\LCD\lcd.c(443): warning:  #12-D: parsing restarts here after previous syntax error
+          LCD_WR_REG(lcddev.setycmd);
+..\HARDWARE\LCD\lcd.c(444): error:  #169: expected a declaration
+          LCD_WR_DATA(y >> 8);
+..\HARDWARE\LCD\lcd.c(445): error:  #169: expected a declaration
+          LCD_WR_DATA(y & 0XFF);
+..\HARDWARE\LCD\lcd.c(446): error:  #169: expected a declaration
+          LCD_WR_DATA(y >> 8);
+..\HARDWARE\LCD\lcd.c(447): error:  #169: expected a declaration
+          LCD_WR_DATA(y & 0XFF);
+..\HARDWARE\LCD\lcd.c(448): error:  #169: expected a declaration
+      }
+..\HARDWARE\LCD\lcd.c(459): warning:  #12-D: parsing restarts here after previous syntax error
+      LCD_RS_CLR;
+..\HARDWARE\LCD\lcd.c(460): error:  #18: expected a ")"
+      LCD_CS_CLR;
+..\HARDWARE\LCD\lcd.c(460): error:  #79: expected a type specifier
+      LCD_CS_CLR;
+..\HARDWARE\LCD\lcd.c(460): error:  #101: "GPIO_TypeDef" has already been declared in the current scope
+      LCD_CS_CLR;
+..\HARDWARE\LCD\lcd.c(460): error:  #141-D: unnamed prototyped parameters not allowed when body is present
+      LCD_CS_CLR;
+..\HARDWARE\LCD\lcd.c(460): error:  #130: expected a "{"
+      LCD_CS_CLR;
+..\HARDWARE\LCD\lcd.c(465): warning:  #12-D: parsing restarts here after previous syntax error
+      LCD_WR_DATA(color);         //写数据
+..\HARDWARE\LCD\lcd.c(465): error:  #29: expected an expression
+      LCD_WR_DATA(color);         //写数据
+..\HARDWARE\LCD\lcd.c(465): error:  #32: expression must have arithmetic type
+      LCD_WR_DATA(color);         //写数据
+..\HARDWARE\LCD\lcd.c: 10 warnings, 30 errors
+compiling core_cm3.c...
+compiling stm32f10x_it.c...
+compiling usart2.c...
+compiling stm32f10x_rcc.c...
+compiling sys.c...
+compiling misc.c...
+compiling stm32f10x_dma.c...
+compiling stm32f10x_tim.c...
+"..\OBJ\ATK-HC05.axf" - 30 Error(s), 10 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.2.0.pack
+                Keil.STM32F1xx_DFP.2.2.0
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_ATK-HC05
+  D:\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+Build Time Elapsed:  00:00:04
+</pre>
+</body>
+</html>
