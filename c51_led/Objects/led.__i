@@ -1,0 +1,1 @@
+"HandWare\led\led.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key;.\HandWare\led) DEBUG OBJECTEXTEND PRINT(.\Listings\led.lst) TABS (2) OBJECT(.\Objects\led.obj)

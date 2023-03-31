@@ -1,0 +1,150 @@
+C51 COMPILER V9.54   KEY                                                                   03/25/2023 08:52:33 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: D:\MDK\C51\BIN\C51.EXE HandWare\key\key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key
+                    -;.\HandWare\led) DEBUG OBJECTEXTEND PRINT(.\Listings\key.lst) TABS(2) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          #include "stdio.h"
+   2          #include "reg51.h"
+   3          #include "INTRINS.H"
+   4          #include "key.h"
+   5          #include "delay.h"
+   6          
+   7          
+   8          sbit L1=P1^0; //¶¨ÒåÁÐÏß
+   9          sbit L2=P1^1;
+  10          sbit L3=P1^2;
+  11          
+  12          //¼üÅÌ½ÓP1¶Ë¿Ú
+  13          
+  14          /*
+  15          unsigned char key_scan(void)
+  16          {
+  17              uchar code_h;
+  18              uchar code_l;
+  19              P2=0xf0;  // ¸ß4Î»×÷ÎªÊä³ö£¬µÍ4Î»×÷ÎªÊäÈë
+  20              if((P1&0xf0)!=0xf0) //¼ì²â°´¼ü°´ÏÂ  
+  21              {
+  22                  key_delay();  //ÑÓ³ÙÏû¶¶10ms
+  23                  if((P1&0xf0)!=0xf0) //ÔÙ´Î¼ì²âÊÇ·ñÓÐ°´¼ü°´ÏÂ
+  24                      code_h=0xfe;
+  25                  while((code_h&0x10)!=0x10)  //ÅÐ¶ÏÊÇ·ñÉ¨µ½ÁË×îºóÒ»ÐÐ, ÎÒ¸Ð¾õÕâ¸öÅÐ¶ÏÓÐµãÎÊÌ£¬ÒÒò´ËÎÒ×ö³öÒ»Ð©¸ü¸Äâ
+  26                  {
+  27                    P1=code_h;
+  28                    if((P1&0xf0)!=0xf0) //ÓÐÈË°´ÏÂ°´¼ü
+  29                    {
+  30                        code_l=(P1&0xf0|0x0f);  // ±£Áô¸ßÎ»£¬µÍÎ»ÖÃ1
+  31                        return ((~code_h)+(~code_l));   //¼üÖµ=ÐÐÉ¨ÃèÖµ+ÁÐÉ¨ÃèÖµ
+  32                    
+  33                    else
+  34                    {
+  35                        code_h=(code_h<<1)|0x01;  //ÐÐÉ¨Ãè×óÒÆ£¬×¼±¸É¨ÃèÏÂÒ»ÐÐ
+  36                    }
+  37                  }
+  38                  
+  39              }
+  40              
+  41              return 0;
+  42          }
+  43          */
+  44          
+  45          //unsigned char key_scan(void)
+  46          //{
+  47          //  uchar  temp;
+  48          //  uchar i;
+  49          //  P1=0x17;
+  50          //  for(i=0;i<2;i++)
+  51          //  {
+  52          //    if(L1==0)
+  53          //    {
+  54          //      if(i==0)
+C51 COMPILER V9.54   KEY                                                                   03/25/2023 08:52:33 PAGE 2   
+
+  55          //      {
+  56          //        return 1;
+  57          //      }
+  58          //      else
+  59          //      {
+  60          //        return 2;
+  61          //      }
+  62          //    }
+  63          //    
+  64          //      else if(L2==0)
+  65          //      {
+  66          //          if(i==0)
+  67          //        {
+  68          //          return 3;
+  69          //        }
+  70          //        else
+  71          //        {
+  72          //          return 4;
+  73          //        }
+  74          //      }
+  75          //      
+  76          //      else if(L3==0)
+  77          //      {
+  78          //          if(i==0)
+  79          //        {
+  80          //          return 5;
+  81          //        }
+  82          //        else
+  83          //        {
+  84          //          return 6;
+  85          //        } 
+  86          //      }
+  87          //      main_delay(600);
+  88          //      temp=P1;
+  89          //      temp=temp|0x07;
+  90          //      temp=temp<<1;
+  91          //      temp=temp|0x07;
+  92          //      P1=temp;
+  93          //      
+  94          //    }
+  95          //  return 0;
+  96          //    
+  97          //}
+  98          
+  99          sbit ROW1 = P1^3; // ?1
+ 100          sbit ROW2 = P1^4; // ?2
+ 101          sbit COL1 = P1^0; // ?1
+ 102          sbit COL2 = P1^1; // ?2
+ 103          sbit COL3 = P1^2; // ?3
+ 104          
+ 105          unsigned char key;
+ 106          unsigned char key_scan(void)
+ 107          {
+ 108   1          unsigned char key_val = 0xff; 
+ 109   1          ROW1 = 0; 
+ 110   1          if (COL1 == 0) key_val = 1; 
+ 111   1          if (COL2 == 0) key_val = 2; 
+ 112   1          if (COL3 == 0) key_val = 3; 
+ 113   1          ROW1 = 1; 
+ 114   1          ROW2 = 0; 
+ 115   1          if (COL1 == 0) key_val = 4; 
+ 116   1          if (COL2 == 0) key_val = 5; 
+C51 COMPILER V9.54   KEY                                                                   03/25/2023 08:52:33 PAGE 3   
+
+ 117   1          if (COL3 == 0) key_val = 6; 
+ 118   1          ROW2 = 1; 
+ 119   1          return key_val; 
+ 120   1      }
+ 121          
+ 122          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     41    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

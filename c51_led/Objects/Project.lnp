@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\delay.obj",
+".\Objects\key.obj",
+".\Objects\led.obj" 
+TO ".\Objects\Project" 
+PRINT(".\Listings\Project.m51") DISABLEWARNING (16) 
