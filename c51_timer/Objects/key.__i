@@ -1,0 +1,1 @@
+"HandWare\key\key.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key;.\HandWare\timer;.\HandWare\delay;.\HandWare\Digital_tube;.\HandWare\led) DEBUG OBJECTEXTEND PRINT(.\Listings\key.lst) TABS (2) OBJECT(.\Objects\key.obj)

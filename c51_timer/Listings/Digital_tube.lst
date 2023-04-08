@@ -1,0 +1,317 @@
+C51 COMPILER V9.54   DIGITAL_TUBE                                                          04/08/2023 09:22:29 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE DIGITAL_TUBE
+OBJECT MODULE PLACED IN .\Objects\Digital_tube.obj
+COMPILER INVOKED BY: D:\MDK\C51\BIN\C51.EXE HandWare\Digital_tube\Digital_tube.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\HandW
+                    -are;.\HandWare\key;.\HandWare\timer;.\HandWare\delay;.\HandWare\Digital_tube;.\HandWare\led) DEBUG OBJECTEXTEND PRINT(.\
+                    -Listings\Digital_tube.lst) TABS(2) OBJECT(.\Objects\Digital_tube.obj)
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include <INTRINS.H>
+   3          #include "Digital_tube.h"
+   4          #include "timer.h"
+   5          #include "delay.h"
+   6          #include "key.h"
+   7          unchar code discode[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};  //  0~9的数字段码表，不带小数点
+   8          
+   9          
+  10          extern int Setting_status;
+  11          extern int hour,minute,second;
+  12          
+  13          
+  14          struct Date{
+  15            unchar time;
+  16            unchar Wen_xuan;
+  17          } select_day[8] = {{0xf9,0x01},{0xc0,0x02},{0xbf,0x04},{0x99,0x08},{0xc0,0x10},{0xbf,0x20},{0xb0,0x40},{0x
+             -a4,0x80}};
+  18          
+  19            
+  20          int Show_time(int Addstatus,int time_value)
+  21          {
+  22   1            unchar i,j = 0x80;
+  23   1        
+  24   1          
+  25   1            switch(Addstatus) //  按键1按下第一次开始计时，第二次暂停计时，第三次秒表清零
+  26   1            {
+  27   2              case 1:
+  28   2              {     
+  29   3                select_day[0].time=discode[time_value];
+  30   3                  select_day[1].time=0xbf;
+  31   3                  select_day[2].time=discode[second % 10];
+  32   3                  select_day[3].time=discode[second / 10];
+  33   3                  select_day[4].time=0xbf;
+  34   3                  select_day[5].time=discode[minute % 10];
+  35   3                  select_day[6].time=discode[minute / 10];
+  36   3                  select_day[7].time=discode[hour % 10];
+  37   3                  
+  38   3                  for(i=0;i<8;i++)
+  39   3                  {
+  40   4                    P1 = select_day[i].Wen_xuan ;
+  41   4                    P0 = select_day[i].time ;
+  42   4                    delay(3);
+  43   4                  }
+  44   3              
+  45   3                
+  46   3              }
+  47   2                break;
+  48   2              
+  49   2              case 2:
+  50   2                TR0 = 0;
+  51   2                {
+  52   3                  select_day[0].time=discode[time_value];
+C51 COMPILER V9.54   DIGITAL_TUBE                                                          04/08/2023 09:22:29 PAGE 2   
+
+  53   3                  select_day[1].time=0xbf;
+  54   3                  select_day[2].time=discode[second % 10];
+  55   3                  select_day[3].time=discode[second / 10];
+  56   3                  select_day[4].time=0xbf;
+  57   3                  select_day[5].time=discode[minute % 10];
+  58   3                  select_day[6].time=discode[minute / 10];
+  59   3                  select_day[7].time=discode[hour % 10];
+  60   3                  
+  61   3                  for(i=0;i<8;i++)
+  62   3                  {
+  63   4                    P1 = select_day[i].Wen_xuan ;
+  64   4                    P0 = select_day[i].time ;
+  65   4                    delay(3);
+  66   4                  }
+  67   3                }
+  68   2                break;
+  69   2                
+  70   2      //          case 3:
+  71   2      //        {
+  72   2      //          hour = 0;
+  73   2      //          minute = 0;
+  74   2      //          second = 0;
+  75   2      //          
+  76   2      //          for(i=0;i<8;i++)
+  77   2      //          {
+  78   2      //            j = _crol_(j,1);
+  79   2      //            if(j == 0x02 || j == 0x10)
+  80   2      //            {
+  81   2      //              P0=0xbf;
+  82   2      //            }
+  83   2      //            if(j == 0x04)
+  84   2      //            {
+  85   2      //              P0 = 0xc0;
+  86   2      //            }
+  87   2      //            else
+  88   2      //            {
+  89   2      //              P0 = 0xc0;
+  90   2      //            } 
+  91   2      //            P1=j;
+  92   2      //            delay(6);
+  93   2      //          }
+  94   2                
+  95   2                
+  96   2              
+  97   2      //        }
+  98   2      //          break;
+  99   2            }
+ 100   1              
+ 101   1        return  0;
+ 102   1      }
+ 103          
+ 104          
+ 105          
+ 106          void Show_date(int Setting_status,int change_value,int select_value)
+ 107          {
+ 108   1              unchar i;
+ 109   1        
+ 110   1      //        key_value = key_scan();
+ 111   1      //        if(key_value==4)
+ 112   1      //        {
+ 113   1      //          Setting_status ++;
+ 114   1      //          if(Setting_status > 4)
+C51 COMPILER V9.54   DIGITAL_TUBE                                                          04/08/2023 09:22:29 PAGE 3   
+
+ 115   1      //          {
+ 116   1      //            Setting_status = 0;
+ 117   1      //          }
+ 118   1      //          select_value = 0;
+ 119   1      //          change_value = 0;
+ 120   1      //        }
+ 121   1      //          
+ 122   1      //        else if(key_value == 3)
+ 123   1      //        {
+ 124   1      //            select_value ++;
+ 125   1      //            if(select_value >= 3)
+ 126   1      //            {
+ 127   1      //              select_value = 1;
+ 128   1      //            }
+ 129   1      //        }
+ 130   1      //        
+ 131   1      //        else if(key_value == 1)
+ 132   1      //        {
+ 133   1      //            change_value +=1;
+ 134   1      //        }
+ 135   1      //        else if(key_value == 2)
+ 136   1      //        {
+ 137   1      //            change_value -=1;
+ 138   1      //        }
+ 139   1      //          
+ 140   1        
+ 141   1          if(Setting_status == 1)
+ 142   1          {
+ 143   2            if(select_value == 1)
+ 144   2            {
+ 145   3              select_day[0].time=discode[0+change_value];
+ 146   3            }
+ 147   2            else if(select_value == 2)
+ 148   2            {
+ 149   3              select_day[1].time=discode[0+change_value];
+ 150   3            }
+ 151   2          }
+ 152   1          
+ 153   1          else if(Setting_status == 2)
+ 154   1          {
+ 155   2            if(select_value == 1)
+ 156   2            {
+ 157   3              select_day[3].time=discode[0+change_value];
+ 158   3            }
+ 159   2            else if(select_value == 2)
+ 160   2            {
+ 161   3              select_day[4].time=discode[0+change_value];
+ 162   3            }
+ 163   2          }
+ 164   1          else if(Setting_status == 3)
+ 165   1          {
+ 166   2            if(select_value == 1)
+ 167   2            {
+ 168   3              select_day[6].time=discode[0+change_value];
+ 169   3            }
+ 170   2            else if(select_value == 2)
+ 171   2            {
+ 172   3              select_day[7].time=discode[0+change_value];
+ 173   3            }
+ 174   2          }
+ 175   1        
+ 176   1            for(i=0;i<8;i++)
+C51 COMPILER V9.54   DIGITAL_TUBE                                                          04/08/2023 09:22:29 PAGE 4   
+
+ 177   1          {
+ 178   2              P1 = select_day[i].Wen_xuan ;
+ 179   2              P0 = select_day[i].time ;
+ 180   2              delay(3);
+ 181   2          }
+ 182   1          
+ 183   1      }
+ 184          
+ 185          
+ 186          
+ 187          //for(i=0;i<8;i++)
+ 188          //          {
+ 189          //            j = _crol_(j,1);
+ 190          //            if(j == 0x01)
+ 191          //          {
+ 192          //            P0 = discode[time_value];//P2 = discode[1];
+ 193          //          }
+ 194          //          else if(j == 0x02)
+ 195          //          {
+ 196          //            P0=0xbf;
+ 197          //          }
+ 198          //          else if(j == 0x04)
+ 199          //          {
+ 200          //            P0 = discode[second % 10];//P2 = discode[2];
+ 201          //          }
+ 202          //          else if(j == 0x08)
+ 203          //          {
+ 204          //            P0 = discode[second / 10];//P2 = discode[3];
+ 205          //          }
+ 206          //          else if(j == 0x10)
+ 207          //          {
+ 208          //            P0=0xbf;
+ 209          //          }
+ 210          //          else if(j == 0x20)
+ 211          //          {
+ 212          //            P0 = discode[minute % 10];//P2 = discode[4];
+ 213          //          }
+ 214          //          else if(j == 0x40)
+ 215          //          {
+ 216          //            P0 = discode[minute / 10];//P2 = discode[5];
+ 217          //          }
+ 218          //          else if(j == 0x80)
+ 219          //          {
+ 220          //            P0=discode[hour % 10];
+ 221          //          }
+ 222          //            P1=j;
+ 223          //            key_delay(5000);
+ 224          //          }
+ 225          
+ 226          
+ 227          
+ 228          //select_day[0].time=discode[time_value];
+ 229          //          select_day[1].time=0xbf;
+ 230          //          select_day[2].time=discode[second % 10];
+ 231          //          select_day[3].time=discode[second / 10];
+ 232          //          select_day[4].time=0xbf;
+ 233          //          select_day[5].time=discode[minute % 10];
+ 234          //          select_day[6].time=discode[minute / 10];
+ 235          //          select_day[7].time=discode[hour % 10];
+ 236          //          for(i=0;i<8;i++)
+ 237          //          {
+ 238          //            P1 = select_day[i].Wen_xuan ;
+C51 COMPILER V9.54   DIGITAL_TUBE                                                          04/08/2023 09:22:29 PAGE 5   
+
+ 239          //            P0 = select_day[i].time ;
+ 240          //            delay(3);
+ 241          //          }
+ 242          
+ 243          //for(i=0;i<8;i++)
+ 244          //          {
+ 245          //            j = _crol_(j,1);
+ 246          //            if(j == 0x01)
+ 247          //          {
+ 248          //            P0 = discode[time_value];//P2 = discode[1];
+ 249          //          }
+ 250          //          else if(j == 0x02)
+ 251          //          {
+ 252          //            P0=0xbf;
+ 253          //          }
+ 254          //          else if(j == 0x04)
+ 255          //          {
+ 256          //            P0 = discode[second % 10];//P2 = discode[2];
+ 257          //          }
+ 258          //          else if(j == 0x08)
+ 259          //          {
+ 260          //            P0 = discode[second / 10];//P2 = discode[3];
+ 261          //          }
+ 262          //          else if(j == 0x10)
+ 263          //          {
+ 264          //            P0=0xbf;
+ 265          //          }
+ 266          //          else if(j == 0x20)
+ 267          //          {
+ 268          //            P0 = discode[minute % 10];//P2 = discode[4];
+ 269          //          }
+ 270          //          else if(j == 0x40)
+ 271          //          {
+ 272          //            P0 = discode[minute / 10];//P2 = discode[5];
+ 273          //          }
+ 274          //          else if(j == 0x80)
+ 275          //          {
+ 276          //            P0=discode[hour % 10];
+ 277          //          }
+ 278          //            P1=j;
+ 279          //            key_delay(5000);
+ 280          //          }
+ 281          
+ 282          
+ 283          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    606    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

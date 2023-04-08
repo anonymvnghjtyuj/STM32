@@ -1,0 +1,1 @@
+"HandWare\Digital_tube\Digital_tube.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key;.\HandWare\timer;.\HandWare\delay;.\HandWare\Digital_tube;.\HandWare\led) DEBUG OBJECTEXTEND PRINT(.\Listings\Digital_tube.lst) TABS (2) OBJECT(.\Objects\Digital_tube.obj)
