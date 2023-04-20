@@ -1,0 +1,56 @@
+C51 COMPILER V9.54   DELAY                                                                 04/20/2023 10:54:14 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE DELAY
+OBJECT MODULE PLACED IN .\Objects\delay.obj
+COMPILER INVOKED BY: D:\MDK\C51\BIN\C51.EXE HandWare\delay\delay.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare
+                    -\key;.\HandWare\delay;.\HandWare\Digital_tube;.\HandWare\led;.\HandWare\produce_wave) DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\delay.lst) TABS(2) OBJECT(.\Objects\delay.obj)
+
+line level    source
+
+   1          #include "stdio.h"
+   2          #include "delay.h"
+   3          #include "reg51.h"
+   4          
+   5          void delay(unsigned int time)
+   6          {
+   7   1        unsigned int j;
+   8   1        while(time--)
+   9   1        {
+  10   2          for(j=0;j<200;j++);
+  11   2        }
+  12   1      }
+  13          
+  14          void key_delay(unsigned int time)
+  15          {
+  16   1        
+  17   1        while(time--)
+  18   1        {
+  19   2          ;
+  20   2        }
+  21   1      }
+  22          
+  23          void delay_1ms(unsigned int count)
+  24          {
+  25   1        uint i,j;
+  26   1        for(i = 0;i < count;i++)
+  27   1        for(j = 0;j < 200 ;j++);
+  28   1      }
+  29          
+  30          
+  31          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     73    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

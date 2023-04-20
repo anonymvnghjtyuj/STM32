@@ -1,0 +1,96 @@
+C51 COMPILER V9.54   KEY                                                                   04/20/2023 10:43:36 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: D:\MDK\C51\BIN\C51.EXE HandWare\key\key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key
+                    -;.\HandWare\delay;.\HandWare\Digital_tube;.\HandWare\led;.\HandWare\produce_wave) DEBUG OBJECTEXTEND PRINT(.\Listings\ke
+                    -y.lst) TABS(2) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          #include "stdio.h"
+   2          #include "reg51.h"
+   3          #include "INTRINS.H"
+   4          #include "key.h"
+   5          #include "delay.h"
+   6          
+   7          
+   8          int Key2_status = 0;
+   9          int Key1_status = 0;
+  10          int key_time;
+  11          
+  12          
+  13          
+  14          void key_Init(void)
+  15          {
+  16   1        EA=1;
+  17   1        EX0=1;
+  18   1        EX1=1;
+  19   1        IT0=1;
+  20   1        IT1=1;
+  21   1        PX1=0;
+  22   1        PX0=0;
+  23   1      }
+  24          
+  25          /*
+  26            先初步设立猜想，就是先使用 KEY1去加快输出正弦波的频率，然后KEY2就减慢正弦波的频率
+  27          */
+  28          //unsigned int key_scan(void)
+  29          //{
+  30          //  
+  31          //    P2=0xff;
+  32          //  if((P2 && 0xfe)!=0xfe)
+  33          //  {
+  34          //        key_delay(5000);
+  35          //    if((P2 && 0xfe)!=0xfe)
+  36          //    {
+  37          //        if(KEY1 == 0)
+  38          //      {
+  39          //          return 1; // 增加
+  40          //      }
+  41          //      else if(KEY2 == 0)
+  42          //      {
+  43          //        return 2; //  减少
+  44          //      }
+  45          //      else 
+  46          //      {
+  47          //        return 0;
+  48          //      }
+  49          //    }
+  50          //  
+  51          //  }
+  52          //  
+  53          //}
+C51 COMPILER V9.54   KEY                                                                   04/20/2023 10:43:36 PAGE 2   
+
+  54          
+  55          void int0() interrupt 0 //  DA输出
+  56          {
+  57   1        key_time++;
+  58   1        Key1_status = 1;
+  59   1        if(key_time >= 3)
+  60   1        {
+  61   2          key_time = 0;
+  62   2        }
+  63   1      }
+  64          
+  65          void int1() interrupt 2 //  AD输入
+  66          {
+  67   1        Key2_status = 1;
+  68   1      }
+  69          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     62    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

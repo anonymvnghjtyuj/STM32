@@ -1,0 +1,7 @@
+".\Objects\main.obj",
+".\Objects\key.obj",
+".\Objects\delay.obj",
+".\Objects\Digital_tube.obj",
+".\Objects\produce_wave.obj" 
+TO ".\Objects\Project" 
+PRINT(".\Listings\Project.m51") DISABLEWARNING (16) 
