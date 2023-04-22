@@ -1,0 +1,9 @@
+".\Objects\main.obj",
+".\Objects\Digital_tube.obj",
+".\Objects\led.obj",
+".\Objects\timer.obj",
+".\Objects\key.obj",
+".\Objects\delay.obj",
+".\Objects\motor.obj" 
+TO ".\Objects\Project" 
+PRINT(".\Listings\Project.m51") DISABLEWARNING (16) 

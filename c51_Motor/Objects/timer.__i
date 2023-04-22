@@ -1,0 +1,1 @@
+"HandWare\timer\timer.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key;.\HandWare\delay;.\HandWare\Digital_tube;.\HandWare\led;.\HandWare\Motor;.\HandWare\timer) DEBUG OBJECTEXTEND PRINT(.\Listings\timer.lst) TABS (2) OBJECT(.\Objects\timer.obj)

@@ -1,0 +1,70 @@
+C51 COMPILER V9.54   LED                                                                   04/22/2023 09:24:50 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN .\Objects\led.obj
+COMPILER INVOKED BY: D:\MDK\C51\BIN\C51.EXE HandWare\led\led.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key
+                    -;.\HandWare\delay;.\HandWare\Digital_tube;.\HandWare\led;.\HandWare\Motor;.\HandWare\timer) DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\led.lst) TABS(2) OBJECT(.\Objects\led.obj)
+
+line level    source
+
+   1          #include "led.h"
+   2          #include "delay.h"
+   3          #include "timer.h"
+   4          #include "reg51.h"
+   5          
+   6          sbit Led = P3^2;
+   7          
+   8          extern int Start;
+   9          
+  10          int a;
+  11          
+  12          void LED(int High_width)
+  13          {
+  14   1        if(10 >= High_width)
+  15   1        {
+  16   2          for(a = 0;a < 5;a++)
+  17   2          {
+  18   3            Led = 0;
+  19   3            delay(5000);
+  20   3            Led = 1;
+  21   3            delay(5000);
+  22   3          }
+  23   2        }
+  24   1        
+  25   1        if(High_width >= 90)
+  26   1        {
+  27   2          TR0 = 1; 
+  28   2        }
+  29   1        
+  30   1        if(Start == 1)
+  31   1        {
+  32   2            Start = 0;
+  33   2            for(a = 0;a < 5;a++)
+  34   2            {
+  35   3              Led = 0;
+  36   3              delay(5000);
+  37   3              Led = 1;
+  38   3              delay(5000);
+  39   3            }
+  40   2        
+  41   2        }
+  42   1        
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    130    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.54   LED                                                                   04/22/2023 09:24:50 PAGE 2   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

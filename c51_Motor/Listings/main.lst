@@ -1,0 +1,224 @@
+C51 COMPILER V9.54   MAIN                                                                  04/22/2023 13:33:56 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\MDK\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key;.\HandWare\
+                    -delay;.\HandWare\Digital_tube;.\HandWare\led;.\HandWare\Motor;.\HandWare\timer) DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include <INTRINS.H>
+   3          #include "led.h"
+   4          #include "key.h"
+   5          #include "delay.h"
+   6          #include "Digital_tube.h"
+   7          #include "motor.h"
+   8          #include "led.h"
+   9          
+  10          extern int High_width ;
+  11          extern int Add_Value;
+  12          extern int Reduce_Value;
+  13          
+  14           void main(void)
+  15          {
+  16   1        
+  17   1        int key_flag;
+  18   1        
+  19   1        Timer_Init();
+*** WARNING C206 IN LINE 19 OF main.c: 'Timer_Init': missing function-prototype
+  20   1        
+  21   1        while(!(key_flag = Key_scan()));  //  ÎÒ·¢ÏÖÒ»¸öÎÊÌâ¾ÍÊÇÈç¹ûÕâ¸öKey_scanÀïÃæÃ»ÓÐÆ¥ÅäµÄÑ¡Ïî£¬Ëû¾Í»áÄ¬ÈÏ´«»ØÒ
+             -»¸ö0£»
+  22   1        
+  23   1        while(1)
+  24   1        {
+  25   2            
+  26   2            switch(key_flag)
+  27   2            {
+  28   3              case 1:
+  29   3                  do
+  30   3                  {
+  31   4                    Motor_Start();
+  32   4                    show(High_width);
+  33   4                    key_flag = Key_scan();
+  34   4                  }while(key_flag != 2 && key_flag != 3 && key_flag != 4 && key_flag != 5 && key_flag != 6);
+  35   3                  break;
+  36   3                  
+  37   3              case 2:
+  38   3                  do
+  39   3                  {
+  40   4                    Motor_Stop();
+  41   4                    show(High_width);
+  42   4                    key_flag = Key_scan();
+  43   4                  }while(key_flag != 1 && key_flag != 3 && key_flag != 4 && key_flag != 5 && key_flag != 6);
+  44   3                  break;
+  45   3                  
+  46   3              case 3:
+  47   3                  do
+  48   3                  {
+  49   4                    Motor_Back();
+  50   4                    show(High_width);
+  51   4                    key_flag = Key_scan();
+C51 COMPILER V9.54   MAIN                                                                  04/22/2023 13:33:56 PAGE 2   
+
+  52   4                  }while(key_flag != 2 && key_flag != 1 && key_flag != 4 && key_flag != 5 && key_flag != 6);
+  53   3                  break;
+  54   3                  
+  55   3              case 4:
+  56   3                  do
+  57   3                  {
+  58   4                    Motor_Start();
+  59   4                    show(High_width);
+  60   4                    key_flag = Key_scan();
+  61   4                  }while(key_flag != 2 && key_flag != 3 && key_flag != 1 && key_flag != 5 && key_flag != 6);
+  62   3                  break;
+  63   3                  
+  64   3              case 5:
+  65   3                  do
+  66   3                  {
+  67   4                    if(Add_Value == 1)
+  68   4                    {
+  69   5                        High_width += 5;
+  70   5                      if(High_width > 100)
+  71   5                      {
+  72   6                        High_width = 50;
+  73   6                      }
+  74   5                      Add_Value = 0;
+  75   5                    }
+  76   4                    LED(High_width);
+  77   4                    show(High_width);
+  78   4                    key_flag = Key_scan();
+  79   4                  }while(key_flag != 2 && key_flag != 3 && key_flag != 1 && key_flag != 4 && key_flag != 6);
+  80   3      
+  81   3                break;
+  82   3              
+  83   3              case 6:
+  84   3                  do
+  85   3                  {
+  86   4                    if(Reduce_Value == 1)
+  87   4                    {
+  88   5                      High_width -= 5;
+  89   5                      if(High_width < 0)
+  90   5                      {
+  91   6                        High_width = 50;
+  92   6                      }
+  93   5                      Reduce_Value = 0;
+  94   5                    }
+  95   4                    LED(High_width);
+  96   4                    show(High_width);
+  97   4                    key_flag = Key_scan();
+  98   4                  }while(key_flag != 2 && key_flag != 3 && key_flag != 1 && key_flag != 4 && key_flag != 5);
+  99   3                  break;
+ 100   3            }
+ 101   2            
+ 102   2          show(High_width);
+ 103   2         }
+ 104   1      }
+ 105          
+ 106          
+ 107          //#include "reg51.h"
+ 108          //#include "intrins.h"
+ 109          //#include "Digital_tube.h"
+ 110          //#include "led.h"
+ 111          //#include "timer.h"
+ 112          //    
+ 113          //sbit key_inc = P1^7;
+C51 COMPILER V9.54   MAIN                                                                  04/22/2023 13:33:56 PAGE 3   
+
+ 114          //sbit key_dec = P1^6;
+ 115          //sbit key_dir = P1^5;
+ 116          //sbit key_on = P1^4;
+ 117          //sbit DIR = P3^0;
+ 118          //sbit PWM = P3^1;
+ 119          
+ 120          
+ 121          //void delay(uint);
+ 122          //int High_width = 50;
+ 123          
+ 124          
+ 125          // void main(void)
+ 126          //{
+ 127          //  Timer_Init();
+ 128          //  
+ 129          //  while(1)
+ 130          //  {
+ 131          //  if(key_on == 0)
+ 132          //    {
+ 133          //     if(key_dir == 0)
+ 134          //     { 
+ 135          //        DIR=1;
+ 136          //         PWM=1;
+ 137          //         delay(High_width);
+ 138          //         PWM=0;
+ 139          //         delay(100-High_width);
+ 140          //      }         
+ 141          //       else
+ 142          //       {  
+ 143          //           DIR=0;
+ 144          //           PWM=1;
+ 145          //           delay(High_width);
+ 146          //           PWM=0;
+ 147          //           delay(100-High_width);
+ 148          //        }
+ 149          //          show(High_width);
+ 150          //    }
+ 151          //     if(key_dec == 0)
+ 152          //      {
+ 153          //        delay(12000);
+ 154          //        if(key_dec == 0)
+ 155          //        {
+ 156          //             if(High_width == 0)High_width = 100;
+ 157          //            else
+ 158          //            High_width = High_width - 1;
+ 159          //            while(key_dec == 0);
+ 160          //        }         
+ 161          //      }
+ 162          
+ 163          //     if(key_inc == 0)
+ 164          //      {
+ 165          //        delay(12000);
+ 166          //        if(key_inc==0)
+ 167          //        {
+ 168          //          if(High_width==100)High_width=0;
+ 169          //          else
+ 170          //          High_width=High_width+1;
+ 171          //          while( key_inc==0 );
+ 172          //        }
+ 173          //      }
+ 174          //      LED(High_width);
+ 175          //      show(High_width);
+C51 COMPILER V9.54   MAIN                                                                  04/22/2023 13:33:56 PAGE 4   
+
+ 176          
+ 177          //     }
+ 178          //}
+ 179          
+ 180          //void delay(uint j)
+ 181          //{
+ 182          //  for(;j>0;j--)
+ 183          //  {
+ 184          //    _nop_();
+ 185          //  }
+ 186          //}
+ 187          
+ 188          
+ 189          
+ 190          
+ 191          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    567    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

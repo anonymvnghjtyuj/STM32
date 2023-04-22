@@ -1,0 +1,1 @@
+"HandWare\produce_wave\produce_wave.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(.\HandWare;.\HandWare\key;.\HandWare\delay;.\HandWare\Digital_tube;.\HandWare\led;.\HandWare\produce_wave) DEBUG OBJECTEXTEND PRINT(.\Listings\produce_wave.lst) TABS (2) OBJECT(.\Objects\produce_wave.obj)

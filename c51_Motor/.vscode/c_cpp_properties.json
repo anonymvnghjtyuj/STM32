@@ -1,0 +1,43 @@
+{
+    "configurations": [
+        {
+            "name": "Target 1",
+            "includePath": [
+                "c:\\Users\\86139\\Desktop\\c51_Motor\\HandWare",
+                "c:\\Users\\86139\\Desktop\\c51_Motor\\HandWare\\key",
+                "c:\\Users\\86139\\Desktop\\c51_Motor\\HandWare\\delay",
+                "c:\\Users\\86139\\Desktop\\c51_Motor\\HandWare\\Digital_tube",
+                "c:\\Users\\86139\\Desktop\\c51_Motor\\HandWare\\led",
+                "D:\\MDK\\C51\\INC",
+                "c:\\Users\\86139\\Desktop\\c51_Motor",
+                "c:\\Users\\86139\\Desktop\\c51_Motor\\HandWare\\Motor"
+            ],
+            "defines": [
+                "__C51__",
+                "__VSCODE_C51__",
+                "reentrant=",
+                "compact=",
+                "small=",
+                "large=",
+                "data=",
+                "idata=",
+                "pdata=",
+                "bdata=",
+                "xdata=",
+                "code=",
+                "bit=char",
+                "sbit=char",
+                "sfr=char",
+                "sfr16=int",
+                "sfr32=int",
+                "interrupt=",
+                "using=",
+                "_at_=",
+                "_priority_=",
+                "_task_="
+            ],
+            "intelliSenseMode": "${default}"
+        }
+    ],
+    "version": 4
+}
